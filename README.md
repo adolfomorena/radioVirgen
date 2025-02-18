@@ -62,7 +62,7 @@ python manage.py aniadirPodcastAPendientes --n "nick_usuario" --p "titulo_podcas
 Este comando permite añadir un **podcast** a la lista de pendientes de un usuario en la base de datos de `radiodb`. Antes de añadirlo, se realizan verificaciones para evitar duplicados en la lista de escuchados y pendientes.
 ## Uso del Comando
 ```sh
-python manage.py aniadirPodcastPendientesNombreOId --n "nick_usuario_O_id" --p "titulo_podcast"
+python manage.py aniadirPodcastPendientesNombreOId --u "nick_usuario_O_id" --p "titulo_podcast"
 ```
 
 # Comando Django: Listar reproducciones por nick
