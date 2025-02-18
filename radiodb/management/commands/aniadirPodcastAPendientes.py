@@ -5,8 +5,8 @@ from radiodb.models import *
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument('--n', type=str, help='Nick del usuario')
-        parser.add_argument('--p', type=str, help='Título del podcast')
+        parser.add_argument('--n', type=str, help='Nick del usuario', required = True)
+        parser.add_argument('--p', type=str, help='Título del podcast', required = True)
 
     def handle(self, *args, **kwargs):
         nick = kwargs['n']
