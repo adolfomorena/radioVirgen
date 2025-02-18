@@ -6,8 +6,8 @@ class Command(BaseCommand):
     help = 'Añade un podcast a la lista de pendientes de un usuario (buscado por nombre o ID), verificando que no haya sido escuchado antes'
 
     def add_arguments(self, parser):
-        parser.add_argument('--u', type=str, help='Nombre o ID del usuario')
-        parser.add_argument('--p', type=str, help='Título del podcast')
+        parser.add_argument('--u', type=str, help='Nombre o ID del usuario', required=True)
+        parser.add_argument('--p', type=str, help='Título del podcast', required=True)
 
     def handle(self, *args, **kwargs):
         usuario_param = kwargs['u']
@@ -15,7 +15,10 @@ class Command(BaseCommand):
 
         try:
             # Buscar usuario por ID o por nombre
-            usuario = Usuario.objects.filter(Q(id=usuario_param) | Q(nik=usuario_param)).first()
+            if usuario_param.isdigit():
+                usuario = Usuario.objects.filter(id=usuario_param).first()
+            else:
+                usuario = Usuario.objects.filter(nik=usuario_param).first()
             if not usuario:
                 self.stdout.write(self.style.ERROR(f'No se encontró un usuario con el ID o nick "{usuario_param}".'))
                 return
