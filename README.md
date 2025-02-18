@@ -3,8 +3,7 @@ superuser=fran
 password=1234
 
 
-
-# Comando Django: Insertar Autores con Faker
+# 1-a. Comando Django: Insertar Autores con Faker
 
 ## Descripción
 
@@ -17,7 +16,23 @@ Adolfo
 python manage.py crearAutores
 ```
 
-# Comando Django: Insertar Usuarios con Faker
+
+# 1-b. Comando Django: Insertar Podcasts con Faker
+
+## Descripción
+
+Este comando genera e inserta **300 registros de podcasts** en la base de datos de la aplicación `radiodb` utilizando la biblioteca `Faker`. 
+Cada podcast se asocia aleatoriamente con autores y programas existentes.
+### Autor 
+Adolfo
+## Comando
+
+```sh
+python manage.py crearPodcasts
+```
+
+
+# 1-c. Comando Django: Insertar Usuarios con Faker
 
 ## Descripción
 
@@ -31,23 +46,34 @@ python manage.py crearUsuarios
 ```
 
 
-
-
-
-# Comando Django: Insertar Podcasts con Faker
+# 2. Comando Django: Listar datos de todos los Usuarios
 
 ## Descripción
 
-Este comando genera e inserta **300 registros de podcasts** en la base de datos de la aplicación `radiodb` utilizando la biblioteca `Faker`. 
-Cada podcast se asocia aleatoriamente con autores y programas existentes.
+Este comando lista los datos de todos los usuarios en la base de datos de la aplicación `radiodb`.
 ### Autor 
 Adolfo
-## Comando
 
+## Comando
 ```sh
-python manage.py crearPodcasts
+python manage.py listarUsuarios
 ```
-# Comando Django: Añadir Podcast a Lista de Pendientes
+
+
+# 3. Comando Django: Listar reproducciones por nick
+
+## Descripción
+
+Este comando lista las resproducciones del usuario pasandole su nick por parametro.
+### Autor 
+Manuel
+## Uso del Comando
+```sh
+python manage.py reproduccionesNick --n "nick_usuario" 
+```
+
+
+# 4. Comando Django: Añadir Podcast a Lista de Pendientes
 
 ## Descripción
 
@@ -59,7 +85,23 @@ Manuel
 ```sh
 python manage.py aniadirPodcastAPendientes --n "nick_usuario" --p "titulo_podcast"
 ```
-# Comando Django: Añadir Podcast a Lista de Pendientes por nick o id
+
+# 5. Comando Django: Añadir un Podcast a la lista Me Gusta por id 
+
+## Descripción
+
+Este comando añade un registro en la lista me gusta, pasando un id de usuario y un id de podcast, 
+en caso de pasar solo el id de un usuario mostrara los me gusta que tiene ese usuario en la base de datos de la aplicación `radiodb`.
+### Autor 
+Adolfo
+
+## Comando
+```sh
+python manage.py asignarMeGusta
+```
+
+
+# 6. Comando Django: Añadir Podcast a Lista de Pendientes por nick o id
 
 ## Descripción
 
@@ -71,14 +113,4 @@ Manuel
 python manage.py aniadirPodcastPendientesNombreOId --u "nick_usuario_O_id" --p "titulo_podcast"
 ```
 
-# Comando Django: Listar reproducciones por nick
 
-## Descripción
-
-Este comando lista las resproducciones del usuario pasandole su nick por parametro.
-### Autor 
-Manuel
-## Uso del Comando
-```sh
-python manage.py reproduccionesNick --n "nick_usuario" 
-```
