@@ -63,7 +63,7 @@ class Lista_Pendientes(models.Model):
 class Lista_Escuchados(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=CASCADE, null=True, blank=True,related_name='lista_escuchados_usuario')
     podcast = models.ForeignKey(Podcast, on_delete=CASCADE, null=True, blank=True,related_name='lista_escuchados_podcast')
-    fecha_escucha = models.DateField(auto_now_add=True)
+    fecha_escucha = models.DateField()
 
     def __str__(self):
         return f"{self.usuario} {self.podcast}"
