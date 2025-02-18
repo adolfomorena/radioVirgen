@@ -1,5 +1,3 @@
-from collections import UserList
-
 from django.core.management.base import BaseCommand
 from radiodb.models import *
 
