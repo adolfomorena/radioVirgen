@@ -97,7 +97,7 @@ Adolfo
 
 ## Comando
 ```sh
-python manage.py asignarMeGusta
+python manage.py asignarMeGusta --u "id_usuario" --p "id_podcast"
 ```
 
 
