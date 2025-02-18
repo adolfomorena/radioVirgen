@@ -10,30 +10,42 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         try:
             fake = Faker()
-            todos_autores = Autor.objects.all()
-            cont = 0
+            todos_autores = list(Autor.objects.all())
+            programas = list(Programa.objects.all())
+            cont = 1
 
             while cont <=300:
                 titulo = fake.sentence(nb_words=4)
                 fecha_publicacion = fake.date_between(start_date='-5y', end_date='today')
-                duracion = random.randint(10, 180)
-                categoria = random.choice(["Educativo", "Comedia", "Formación"])
-                link = fake.url()
+                categorias = random.choice(["Educativo", "Comedia", "Formación"])
+                link = f"http://www.drive{cont}.com"
 
                 nuevos_autores = random.sample(todos_autores, random.randint(1, 5))
+                programa_nuevo = random.choice(programas)
 
-                lista_podcast_autores_repe = Podcast.objects.filter(autores__in=[autor for autor in nuevos_autores])
+                # Si ya existe un podcast que involucre alguno de estos autores en el mismo programa, se salta la creación
+                if Podcast.objects.filter(autores__in=nuevos_autores, programa=programa_nuevo).exists():
+                    continue
 
-                programa_nuevo = random.choice(Programa.objects.all())
-
+                podcast = Podcast(
+                    titulo=titulo,
+                    fecha_publicacion=fecha_publicacion,
+                    categorias=categorias,
+                    linkDrive=link
+                )
+                podcast.save()
+                podcast.autores.set(nuevos_autores)
+                cont+=1
+                '''
+                
                 if len(lista_podcast_autores_repe) == 0:
                     podcast = Podcast(
                         titulo=titulo,
                         fecha_publicacion=fecha_publicacion,
-                        duracion=duracion,
-                        categoria=categoria,
-                        link = link
+                        categorias=categorias,
+                        linkDrive = link
                     )
+                    podcast.save()
                     podcast.autores.set(nuevos_autores)
                     podcast.programa = programa_nuevo
                     podcast.save()
@@ -47,14 +59,16 @@ class Command(BaseCommand):
                             podcast = Podcast(
                                 titulo=titulo,
                                 fecha_publicacion=fecha_publicacion,
-                                duracion=duracion,
-                                categoria=categoria,
-                                link=link,
+                                categorias=categorias,
+                                linkDrive=link,
                                 programa = programa_nuevo
                             )
+                            podcast.save()
                             podcast.autores.set(random.sample(todos_autores, random.randint(1, 5)))
                             podcast.save()
                             cont+=1
+
+                '''
 
             self.stdout.write(self.style.SUCCESS('300 podcasts han sido cargados exitosamente.'))
 
