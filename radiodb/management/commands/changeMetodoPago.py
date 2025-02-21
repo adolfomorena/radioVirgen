@@ -45,6 +45,6 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f'Metodo de pago cambiado correctamente'))
 
         except Usuario.DoesNotExist:
-            self.stdout.write(self.style.ERROR(f'No se encontró un usuario con el nick {nick}.'))
+            self.stdout.write(self.style.ERROR(f'No se encontró un usuario con el  {id_param}.'))
         except MetodosPago.DoesNotExist:
             self.stdout.write(self.style.ERROR(f'No se encontró un metodo de pago con el id {id_pago}.'))

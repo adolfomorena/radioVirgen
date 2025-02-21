@@ -12,7 +12,7 @@ class Command(BaseCommand):
             metodos = ["PagoTarjeta", "Paypal", "Transferencia"]
             usuario  = Usuario.objects.filter(id="1").first()
 
-            
+
             transferencia = MetodosPago(
                 tipo=metodos[2],
                 numeroCuenta="ES1234567891234567",
