@@ -16,6 +16,26 @@ class Usuario(models.Model):
         return f"{self.nombre} {self.apellidos}"
 
 
+
+class MetodosPago(models.Model):
+    tipo = models.CharField(max_length=100)
+    numeroTarjeta = models.CharField(max_length=16, null=True, blank=True)
+    cvc = models.CharField(max_length=3, null=True, blank=True)
+    nombreTitular = models.CharField(max_length=100, null=True, blank=True)
+    correroTitular = models.EmailField(null=True, blank=True)
+    numeroCuenta = models.CharField(max_length=24, null=True, blank=True)
+    usuario = models.ForeignKey(Usuario, on_delete=CASCADE, null=True, blank=True, related_name='metodos_pago_usuario')
+    predeterminado = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.tipo} {self.id}"
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(check=models.Q(tipo__in=["PagoTarjeta", "Paypal", "Transferencia"]), name='pagos_check')
+        ]
+
+
 class Autor(models.Model):
     nombre = models.CharField(max_length=100)
     fecha_registro = models.DateField(auto_now_add=True)
